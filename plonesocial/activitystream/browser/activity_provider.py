@@ -22,20 +22,6 @@ from plonesocial.activitystream.interfaces import IActivity
 TAGRE = re.compile('(#(\S+))')
 
 from plonesocial.activitystream.integration import PLONESOCIAL
-from AccessControl import Unauthorized
-import itertools
-from zExceptions import NotFound
-def date_key(item):
-    if hasattr(item, 'effective'):
-        # catalog brain
-        return max(item.effective, item.created)
-    # Activity
-    return item.date
-
-
-
-
-
 
 
 def link_tags(text, url=''):
@@ -193,69 +179,3 @@ class ActivityProvider(object):
     @property
     def Title(self):
         return self.title
-
-
-
-    # return inners
-
-    def _activities_statuses(self):
-#        if not self.show_microblog:
-#            return []
-        container = PLONESOCIAL.microblog
-        # show_microblog yet no container can happen on microblog uninstall
-        if not container:
-            return []
-        try:
-            # filter on users OR context, not both
-            #if self.users:
-            #    # support plonesocial.network integration
-            #    return container.user_values(self.users,
-            #                                 limit=self.count,
-            #                                 tag=self.tag)
-            #elif self.microblog_context:
-            if self.microblog_context:
-                # support collective.local integration
-                return container.context_values(self.microblog_context,
-                                                limit=10,
-                                                tag=None)
-            else:
-                # default implementation
-                return container.values(limit=10,
-                                        tag=None)
-        except Unauthorized:
-            return []
-
-    def activities(self):
-        statuses = self._activities_statuses()
-        items = itertools.chain(statuses)
-        # see date_key sorting function above
-        items = sorted(items, key=date_key, reverse=True)
-
-        i = 0
-        for item in items:
-            if i >= 10:
-                break
-            try:
-                activity = IActivity(item)
-            except Unauthorized:
-                continue
-            except NotFound:
-                #logger.exception("NotFound: %s" % item.getURL())
-                continue
-
-            #if self._activity_visible(activity):
-            if True:
-                yield activity
-                i += 1
-
-    def activity_providers(self):
-        for activity in self.activities():
-
-            #if not self.can_view(activity):
-                # discussion parent inaccessible
-            #    continue
-            yield getMultiAdapter(
-                (activity, self.request, self.view),
-                IActivityProvider,
-                name="plonesocial.activitystream.activity_provider")
-

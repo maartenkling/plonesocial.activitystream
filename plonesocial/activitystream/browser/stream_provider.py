@@ -74,6 +74,8 @@ class StreamProvider(object):
     def activities(self):
         brains = self._activities_brains()
         statuses = self._activities_statuses()
+        # only None context
+        statuses = [x for x in statuses if x._context_uuid is None]
         items = itertools.chain(brains, statuses)
         # see date_key sorting function above
         items = sorted(items, key=date_key, reverse=True)
@@ -126,6 +128,7 @@ class StreamProvider(object):
         if not self.show_microblog:
             return []
         container = PLONESOCIAL.microblog
+
         # show_microblog yet no container can happen on microblog uninstall
         if not container:
             return []
