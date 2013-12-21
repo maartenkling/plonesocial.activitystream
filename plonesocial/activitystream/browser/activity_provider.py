@@ -19,9 +19,8 @@ from .interfaces import IPlonesocialActivitystreamLayer
 from .interfaces import IActivityProvider
 from plonesocial.activitystream.interfaces import IActivity
 
-TAGRE = re.compile('(#(\S+))')
 
-from plonesocial.activitystream.integration import PLONESOCIAL
+TAGRE = re.compile('(#(\S+))')
 
 
 def link_tags(text, url=''):
@@ -40,9 +39,6 @@ class ActivityProvider(object):
         self.context = context
         self.request = request
         self.view = self.__parent__ = view
-
-        # inline rendering
-        self.microblog_context = PLONESOCIAL.context(context.context.getObject())
 
     def update(self):
         pass
