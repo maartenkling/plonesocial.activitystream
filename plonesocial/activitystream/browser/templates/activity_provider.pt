@@ -9,7 +9,6 @@
   </div>
 
   <div class="activityBody">
-
     <a href="" class="creator"
        tal:condition="view/Creator"
        tal:content="view/Creator"
@@ -18,33 +17,26 @@
     </a>
 
     <div class="activityByLine">
-
-        <a href="" class="userid"
-           tal:content="string:@${view/userid}"
-           tal:attributes="href view/author_home_url">
-          Poster Name
-        </a>
-
+      <a href="" class="userid"
+         tal:content="string:@${view/userid}"
+         tal:attributes="href view/author_home_url">
+        Poster Name
+      </a>
       <span tal:condition="view/is_status"
             i18n:translate="label_says">says:</span>
-
       <span tal:condition="view/is_discussion"
             i18n:translate="label_commented_on">commented on</span>
-
       <span tal:condition="view/is_content"
             i18n:translate="label_created">created</span>
-
       <a tal:attributes="href view/url;
                          title view/Title"
          tal:content="view/Title">view title</a>
-
     </div>
 
     <div class="activityText"
          tal:define="is_content view/is_content;
                      canReview python:view.can_review() and not is_content"
          tal:condition="view/getText">
-
       <div class="commentActions"
            tal:condition="view/is_discussion"
            i18n:domain="plone.app.discussion">
@@ -61,7 +53,6 @@
                  i18n:attributes="value label_delete;"
                  />
         </form>
-        <!-- Workflow actions (e.g. 'publish') -->
         <form name=""
               action=""
               method="get"
@@ -79,15 +70,11 @@
                  />
         </form>
       </div>
-
       <span tal:replace="structure view/getText" />
-    </div><!-- /activityText -->
-
-    <div class="activityDate"
-	 tal:content="view/date">
-      8/23/2001 12:40:44 PM
     </div>
 
-  </div><!-- / activityBody -->
-
+    <div class="activityDate" tal:content="view/date">
+      8/23/2001 12:40:44 PM
+    </div>
+  </div>
 </div>
