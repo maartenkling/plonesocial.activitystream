@@ -78,8 +78,9 @@
     </div>
   </div>
 
-  <br />
-  id:<span tal:content="view/getId" />
-  <tal:block replace="structure view/status_provider" />
+  <dl class="debug">
+    <dt>id:</dt><dd tal:content="view/context/id"></dd>
+    <dt>thread_id:</dt><dd tal:content="view/context/thread_id"></dd>
+  </dl>
 
 </div>
