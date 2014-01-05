@@ -21,6 +21,8 @@ class StatusActivity(object):
         self.title = ''
         self.url = ''
         self.id = context.id
+        # FIXME: 's/thread/thread_id' in plonesocial.microblog
+        self.thread_id = context.thread
         self.portal_type = 'StatusUpdate'
         self.render_type = 'status'
         self.Creator = context.creator
@@ -44,6 +46,7 @@ class BrainActivity(object):
         self.title = obj.Title()
         self.url = context.getURL()
         self.id = context.getId()
+        self.thread_id = None
         self.portal_type = obj.portal_type
         self.Creator = obj.Creator()
         self.raw_date = max(context.created, context.effective)
