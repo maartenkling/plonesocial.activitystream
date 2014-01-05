@@ -77,4 +77,9 @@
       8/23/2001 12:40:44 PM
     </div>
   </div>
+
+  <br />
+  id:<span tal:content="view/getId" />
+  <tal:block replace="structure view/status_provider" />
+
 </div>

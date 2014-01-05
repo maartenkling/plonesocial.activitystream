@@ -4,6 +4,7 @@ from zope.interface import Attribute
 
 class IActivity(Interface):
     """Core content-ish accessors"""
+    getId = Attribute("id")
     getURL = Attribute("url")
     Title = Attribute("title")
     userid = Attribute("userid")

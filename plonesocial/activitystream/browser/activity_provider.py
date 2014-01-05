@@ -175,3 +175,20 @@ class ActivityProvider(object):
     @property
     def Title(self):
         return self.title
+
+    @property
+    def getId(self):
+        return self.context.id
+
+    def getThread(self):
+        return 1
+
+    def status_provider(self):
+        #if not PLONESOCIAL.microblog:
+        #    return ''
+        provider = getMultiAdapter(
+            (self.context, self.request, self.view),
+            name="plonesocial.microblog.status_provider")
+        provider.thread = self.getId
+        #provider.update()
+        return provider()

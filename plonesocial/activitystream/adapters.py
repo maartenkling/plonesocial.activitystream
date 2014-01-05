@@ -20,6 +20,7 @@ class StatusActivity(object):
         self.text = context.text
         self.title = ''
         self.url = ''
+        self.id = context.id
         self.portal_type = 'StatusUpdate'
         self.render_type = 'status'
         self.Creator = context.creator
@@ -42,6 +43,7 @@ class BrainActivity(object):
         obj = context.getObject()
         self.title = obj.Title()
         self.url = context.getURL()
+        self.id = context.getId()
         self.portal_type = obj.portal_type
         self.Creator = obj.Creator()
         self.raw_date = max(context.created, context.effective)
