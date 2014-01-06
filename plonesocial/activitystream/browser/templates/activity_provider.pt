@@ -81,6 +81,29 @@
   <dl class="debug">
     <dt>id:</dt><dd tal:content="view/context/id"></dd>
     <dt>thread_id:</dt><dd tal:content="view/context/thread_id"></dd>
+
+    <form class="rowlike enableUnloadProtection   kssattr-formname-stream" action="http://localhost:8080/Plone/stream" method="post" enctype="multipart/form-data">
+      <div data-fieldname="form.widgets.text" class="field z3cformInlineValidation kssattr-fieldname-form.widgets.text" id="formfield-form-widgets-text">
+        <label for="form-widgets-text" class="horizontal">
+          What are you doing?
+          <span class="required horizontal" title="Required">&nbsp;</span>
+        </label>
+        <div class="fieldErrorBox"></div>
+        <textarea id="form-widgets-text" name="form.widgets.text" class="textarea-widget required text-field"></textarea>
+      </div>
+      <div data-fieldname="form.widgets.thread" class="field z3cformInlineValidation kssattr-fieldname-form.widgets.thread" id="formfield-form-widgets-thread">
+        <label for="form-widgets-thread" class="horizontal">
+          status.id from parent
+          <span class="required horizontal" title="Required">&nbsp;</span>
+        </label>
+        <div class="fieldErrorBox"></div>
+        <input id="form-widgets-thread" name="thread_id" tal:attributes="value view/context/id" class="text-widget required textline-field hide" value="" type="text">
+      </div>
+      <div class="formControls">
+        <input id="form-buttons-statusupdate" name="form.buttons.statusupdate" class="submit-widget button-field standalone" value="Status Update" type="submit"><input id="form-buttons-cancel" name="form.buttons.cancel" class="submit-widget button-field hide" value="Cancel" type="submit">
+      </div>
+    </form>
+
   </dl>
 
 </div>

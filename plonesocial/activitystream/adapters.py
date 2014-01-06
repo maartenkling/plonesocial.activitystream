@@ -22,7 +22,7 @@ class StatusActivity(object):
         self.url = ''
         self.id = context.id
         # FIXME: 's/thread/thread_id' in plonesocial.microblog
-        self.thread_id = context.thread
+        self.thread_id = context.thread_id
         self.portal_type = 'StatusUpdate'
         self.render_type = 'status'
         self.Creator = context.creator
@@ -45,7 +45,7 @@ class BrainActivity(object):
         obj = context.getObject()
         self.title = obj.Title()
         self.url = context.getURL()
-        self.id = context.getId()
+        self.id = context.id
         self.thread_id = None
         self.portal_type = obj.portal_type
         self.Creator = obj.Creator()
