@@ -78,6 +78,12 @@ class StreamView(BrowserView):
         provider.update()
         return provider()
 
+    def conversation_provider(self):
+        provider = getMultiAdapter(
+            (self.context, self.request, self),
+            name="plonesocial.conversation.conversation_provider")
+        return provider()
+
     def stream_provider(self):
         provider = getMultiAdapter(
             (self.context, self.request, self),

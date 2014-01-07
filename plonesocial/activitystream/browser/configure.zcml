@@ -20,12 +20,17 @@
       layer=".interfaces.IPlonesocialActivitystreamLayer"
       />
 
-  <adapter 
+  <adapter
+      name="plonesocial.conversation.conversation_provider"
+      factory=".conversation.ConversationProvider"
+      />
+
+  <adapter
       name="plonesocial.activitystream.activity_provider"
       factory=".activity_provider.ActivityProvider"
       />
 
-  <adapter 
+  <adapter
       name="plonesocial.activitystream.stream_provider"
       factory=".stream_provider.StreamProvider"
       />
@@ -49,13 +54,13 @@
 
   <!-- complex portlet-based view separated out for clear config -->
   <include file="activitystream_portal.zcml" />
-  
-  
+
+
   <browser:resourceDirectory
       name="plonesocial.activitystream.stylesheets"
       directory="stylesheets"
       layer=".interfaces.IPlonesocialActivitystreamLayer"
       />
-  
+
 
 </configure>

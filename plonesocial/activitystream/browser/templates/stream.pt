@@ -13,16 +13,45 @@
       <div id="content">
 
         <div class="plonesocial activitystream">
-          <h1 class="documentFirstHeading" i18n:translate=""
-              tal:content="view/title">Updates</h1>
 
           <tal:block replace="structure view/status_provider" />
 
-          <h2 tal:condition="view/tag" i18n:translate="">Updates tagged
-            #<span tal:replace="view/tag" i18n:name="tag">sometag</span>
-          </h2>
+          <tal:block condition="python: not 'thread_id' in context.REQUEST.form">
+            <h1 class="documentFirstHeading" i18n:translate=""
+                tal:content="view/title">Updates</h1>
 
-          <tal:block replace="structure view/stream_provider" />
+            <h2 tal:condition="view/tag" i18n:translate="">Updates tagged
+              #<span tal:replace="view/tag" i18n:name="tag">sometag</span>
+            </h2>
+
+            <tal:block replace="structure view/stream_provider" />
+          </tal:block>
+
+          <tal:block condition="python: 'thread_id' in context.REQUEST.form">
+            <h2>Conversation</h2>
+            <tal:block replace="structure view/conversation_provider" />
+
+            <div id="microblog" class="plonesocial">
+                <form class="rowlike enableUnloadProtection"
+                      action="@@stream"
+                      tal:attributes="action string:@@stream?thread_id=${context/REQUEST/form/thread_id}"
+                      method="post" enctype="multipart/form-data">
+                  <div data-fieldname="form.widgets.text" class="field z3cformInlineValidation" id="formfield-form-widgets-text">
+                    <label for="form-widgets-text" class="horizontal">
+                      Reply
+                      <span class="required horizontal" title="Required">&nbsp;</span>
+                    </label>
+                    <div class="fieldErrorBox"></div>
+                    <textarea id="form-widgets-text" name="form.widgets.text" class="textarea-widget required text-field"></textarea>
+                  </div>
+                  <div class="formControls">
+                    <input id="form-buttons-statusupdate" name="form.buttons.statusupdate" class="submit-widget button-field standalone" value="Status Update" type="submit"><input id="form-buttons-cancel" name="form.buttons.cancel" class="submit-widget button-field hide" value="Cancel" type="submit">
+                  </div>
+                </form>
+            </div>
+          </tal:block>
+
+
         </div>
 
       </div>
